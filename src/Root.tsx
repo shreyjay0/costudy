@@ -12,6 +12,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import RecordGoals from "./pages/RecordGoals";
 
 export default function Root() {
   return (
@@ -21,6 +22,11 @@ export default function Root() {
           <Route path="/" exact component={Main} />
           <Route path="/session" exact component={ToSession} />
           <Route path="/session/:type" exact component={Session} />
+          <Route
+            path="/session/go/record-goals"
+            exact
+            component={RecordGoals}
+          />
           <Route path="/session/room" exact component={Room} />
           <Route component={() => <Redirect to="/" />} />
         </Switch>

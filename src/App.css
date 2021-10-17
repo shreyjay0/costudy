@@ -1,10 +1,8 @@
-.App {
-  text-align: center;
+.outer-main {
+  background: linear-gradient(161.05deg, #f8fcfc -18.29%, #ffffff 107.78%);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.goals-outer {
+  margin: 1em 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
