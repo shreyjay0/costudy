@@ -1,23 +1,24 @@
 
+import re
 from flask import Flask, redirect,request, jsonify, Blueprint
-from models import db , Sessions
-from utils import send_resp
+from .models import  Sessions, db
+from .utils import send_resp, send_serialise
 
 ssn = Blueprint("ssn", __name__)
 
-@ssn.route('/', methods=["GET"])
+@ssn.route('/goalslist', methods=["GET"])
 def all_goals():
     return jsonify(Sessions.query.all())
 
 @ssn.route('/addgoals', methods=["GET", "POST"])
 def add():
-    req = request.get_json() 
+    req = request.get_json()
     if not req:
         return send_resp(400, "Invalid request")
-    nsession = Sessions(req.get("goal"))
+    nsession = Sessions(goals = req.get("goals"),reached= False)
     db.session.add(nsession)
     db.session.commit()
-    return send_resp(201,"Goal added",Sessions.query.all())
+    return send_serialise(Sessions.query.all())
 
 @ssn.route("/update/<int:id>", methods=["PUT"])
 def update(id):
