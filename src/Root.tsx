@@ -29,7 +29,7 @@ export default function Root() {
             component={RecordGoals}
           />
           <Route path="/session/room/:id" exact component={Room} />
-          <Route path="/session/thanks" exact component={SessionThanks} />
+          <Route path="/exit-session/thanks" exact component={SessionThanks} />
           <Route component={() => <Redirect to="/" />} />
         </Switch>
       </Router>

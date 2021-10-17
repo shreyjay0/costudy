@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Text } from "@chakra-ui/layout";
+import { Box, Container, HStack, Stack, Text } from "@chakra-ui/layout";
 import GoalsIcon from "../assets/GoalsIcon.svg";
 import PartIcon from "../assets/PartIcon.svg";
 import MicIcon from "../assets/MicIcon.svg";
@@ -7,23 +7,56 @@ import ShareIcon from "../assets/ShareIcon.svg";
 import ChatIcon from "../assets/ChatIcon.svg";
 import TuneIcon from "../assets/TuneIcon.svg";
 import ExitIcon from "../assets/ExitIcon.svg";
-
-import React from "react";
+import MinIcon from "../assets/MinIcon.svg";
+import MaxIcon from "../assets/MaxIcon.svg";
+import MidIcon from "../assets/MidIcon.svg";
+import React, { useState } from "react";
 import avatarStream from "../assets/avatarStream.mp4";
 import { Image } from "@chakra-ui/image";
 import { useHistory } from "react-router-dom";
+import Chat from "../components/Live/Chat";
+import Goals from "../components/Live/Goals";
+import Participants from "../components/Live/Participants";
+import vid from "../assets/vid.png";
 const Room = () => {
   const history = useHistory();
   const onClickExit = () => {
-    history.push("/session/thanks");
+    history.push("/exit-session/thanks");
   };
-  const onClickCam = () => {};
-  const onClickChat = () => {};
-  const onClickGoals = () => {};
-  const onClickMic = () => {};
-  const onClickParticipants = () => {};
-  const onClickPlay = () => {};
-  const onClickShare = () => {};
+  const [chatVisible, setchatVisible] = useState(false);
+  const [goalVisible, setgoalVisible] = useState(false);
+  const [partVisible, setpartVisible] = useState(false);
+  const [muted, setmuted] = useState(false);
+  const [camOn, setcamOn] = useState(false);
+  const [playMusic, setplayMusic] = useState(false);
+  const [screenVisible, setscreenVisible] = useState(false);
+  const onClickCam = () => {
+    setcamOn(!camOn);
+  };
+  const onClickChat = () => {
+    setchatVisible(!chatVisible);
+    setgoalVisible(false);
+    setpartVisible(false);
+  };
+  const onClickGoals = () => {
+    setgoalVisible(!goalVisible);
+    setchatVisible(false);
+    setpartVisible(false);
+  };
+  const onClickMic = () => {
+    setmuted(!muted);
+  };
+  const onClickParticipants = () => {
+    setpartVisible(!partVisible);
+    setchatVisible(false);
+    setgoalVisible(false);
+  };
+  const onClickPlay = () => {
+    setplayMusic(!screenVisible);
+  };
+  const onClickShare = () => {
+    setscreenVisible(!screenVisible);
+  };
   return (
     <Container>
       <Box>
@@ -31,6 +64,30 @@ const Room = () => {
           <source src={avatarStream} type="video/mp4" />
         </video>
       </Box>
+      <Stack maxW="150px" position="fixed" left="60px" top="40px">
+        <Box
+          borderRadius="7"
+          bg="#E06351"
+          p="4"
+          boxShadow="0px 0px 20px rgba(0, 0, 0, 0.35)"
+        >
+          <Text textAlign="center" fontWeight="bold">
+            23:46
+          </Text>
+          <Text>Time to focus!</Text>
+        </Box>
+        <Box
+          borderRadius="7"
+          bg="#F4D0C2"
+          p="4"
+          boxShadow="0px 0px 20px rgba(0, 0, 0, 0.35)"
+        >
+          <Text textAlign="center" fontWeight="bold">
+            4:45
+          </Text>
+          <Text>Upcoming break</Text>
+        </Box>
+      </Stack>
       <HStack
         minW="20%"
         position="fixed"
@@ -43,7 +100,7 @@ const Room = () => {
         px="65px"
         justifyContent="space-between"
       >
-        <Box d="flex" justifyContent="space-between" width="13%">
+        <Box d="flex" justifyContent="space-between" width="17%">
           <Box>
             <Box
               bg="#e2e2e2"
@@ -53,6 +110,7 @@ const Room = () => {
               onClick={onClickGoals}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -65,7 +123,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Goals</Text>
+            <Text fontSize="14">Goals</Text>
           </Box>
 
           <Box>
@@ -77,6 +135,7 @@ const Room = () => {
               onClick={onClickParticipants}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -89,7 +148,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Part</Text>
+            <Text fontSize="14">Participants</Text>
           </Box>
         </Box>
         <Box d="flex" justifyContent="space-between" width="30%">
@@ -102,6 +161,7 @@ const Room = () => {
               onClick={onClickMic}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -114,7 +174,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Mic</Text>
+            <Text fontSize="14">Mute</Text>
           </Box>
           <Box>
             <Box
@@ -125,6 +185,7 @@ const Room = () => {
               onClick={onClickCam}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -137,7 +198,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Cam</Text>
+            <Text fontSize="14">Stop video</Text>
           </Box>
           <Box>
             <Box
@@ -148,6 +209,7 @@ const Room = () => {
               onClick={onClickShare}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -160,7 +222,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Screenshare</Text>
+            <Text fontSize="14">Screenshare</Text>
           </Box>
           <Box>
             <Box
@@ -171,6 +233,7 @@ const Room = () => {
               onClick={onClickChat}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -183,7 +246,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Chat</Text>
+            <Text fontSize="14">Chat</Text>
           </Box>
         </Box>
         <Box d="flex" justifyContent="space-between" width="13%">
@@ -196,6 +259,7 @@ const Room = () => {
               onClick={onClickPlay}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -208,7 +272,7 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Ambient music</Text>
+            <Text fontSize="14">Ambient music</Text>
           </Box>
           <Box>
             <Box
@@ -219,6 +283,7 @@ const Room = () => {
               onClick={onClickExit}
               borderRadius="10"
               className="session-controls"
+              m="0 auto"
               _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
             >
               <Image
@@ -231,10 +296,35 @@ const Room = () => {
                 _hover={{ transform: "scale(1.05)", cursor: "pointer" }}
               />
             </Box>
-            <Text>Leave session</Text>
+            <Text fontSize="14">Leave session</Text>
           </Box>
         </Box>
       </HStack>
+      <Stack
+        borderRadius="20px"
+        position="fixed"
+        bottom="135"
+        left="14"
+        bg="white"
+      >
+        <Image src={vid} />
+      </Stack>
+
+      {chatVisible ? (
+        <Box position="fixed" right="3%">
+          <Chat />
+        </Box>
+      ) : undefined}
+      {goalVisible ? (
+        <Box position="fixed" right="3%">
+          <Goals />
+        </Box>
+      ) : undefined}
+      {partVisible ? (
+        <Box position="fixed" right="3%">
+          <Participants />
+        </Box>
+      ) : undefined}
     </Container>
   );
 };

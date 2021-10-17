@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Container, Heading } from "@chakra-ui/layout";
+import { Box, Container, Heading, Stack } from "@chakra-ui/layout";
 import { useHistory } from "react-router-dom";
 export default function SessionThanks() {
   const history = useHistory();
@@ -19,37 +19,40 @@ export default function SessionThanks() {
         d="flex"
         alignItems="center"
         textAlign="center"
+        justifyContent="space-between"
       >
         <Heading
           className="ft-head"
-          size="3xl"
+          size="2xl"
           fontWeight="light"
           color="#E06351"
         >
           Thank you for joining the session.
         </Heading>
-        <Button
-          bg="#E06351"
-          color="white"
-          onClick={goHome}
-          borderRadius="20"
-          my="30"
-          minW="200"
-          _hover={{ background: "#D93737" }}
-        >
-          Go home
-        </Button>
-        <Button
-          bg="#E06351"
-          color="white"
-          onClick={getNewSession}
-          borderRadius="20"
-          my="30"
-          minW="200"
-          _hover={{ background: "#D93737" }}
-        >
-          Start a new session
-        </Button>
+        <Stack>
+          <Button
+            bg="#E06351"
+            color="white"
+            onClick={goHome}
+            borderRadius="20"
+            my="30"
+            minW="100"
+            _hover={{ background: "#D93737" }}
+          >
+            Go home
+          </Button>
+          <Button
+            bg="#E06351"
+            color="white"
+            onClick={getNewSession}
+            borderRadius="20"
+            my="30"
+            minW="100"
+            _hover={{ background: "#D93737" }}
+          >
+            Start a new session
+          </Button>
+        </Stack>
       </Box>
     </Container>
   );
