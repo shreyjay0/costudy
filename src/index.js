@@ -5,10 +5,12 @@ import Root from "./Root";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme/theme";
 import { ColorModeScript } from "@chakra-ui/react";
+import NavBar from "./components/Nav/NavBar";
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <NavBar className="nav" />
     <Root />
   </React.StrictMode>,
   document.getElementById("root")

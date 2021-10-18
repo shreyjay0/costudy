@@ -1,5 +1,6 @@
 .outer-main {
   background: linear-gradient(161.05deg, #f8fcfc -18.29%, #ffffff 107.78%);
+  overflow-x: hidden;
 }
 .goals-outer {
   margin: 1em 0;

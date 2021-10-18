@@ -30,7 +30,7 @@ const Find = () => {
     },
   ];
   return (
-    <Container maxW="90vw" centerContent>
+    <Container maxW="90vw" centerContent id="reviews">
       <div className="review">
         <Center className="review-head" my="20">
           <Heading

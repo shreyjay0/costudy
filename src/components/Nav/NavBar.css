@@ -1,0 +1,10 @@
+.nav-items {
+  margin: 0px 20px;
+  white-space: nowrap;
+  color: white;
+}
+.nav-items:hover {
+  transform: scale(1.1);
+  transition-duration: 3.5s;
+  color: rgb(17, 17, 17);
+}
